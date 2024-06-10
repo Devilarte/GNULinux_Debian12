@@ -1,0 +1,23 @@
+# Prometheus Config
+
+global:
+  scrape_interval:     5m # Default 1min
+  evaluation_interval: 5m # Default 1min
+  scrape_timeout:      5s # Default 10s
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['localhost:9093']
+
+# Load rules and evaluate them according to evaluation_interval
+rule_files:
+
+# Scrape configuration
+scrape_configs:
+  - job_name: unbound
+    scrape_interval: 5m
+    scrape_timeout: 5s
+    static_configs:
+      - targets: ['localhost:9167']

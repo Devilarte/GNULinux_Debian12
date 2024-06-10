@@ -1,0 +1,10 @@
+[Unit]
+Description=Atualização da Lista RPZ (Timer) - Mensalmente no último DOM às 3:50h
+
+[Timer]
+#OnCalendar=Sun 03:50
+OnCalendar=Sun *-*~07/1 03:50
+Persistent=true
+ 
+[Install]
+WantedBy=timers.target

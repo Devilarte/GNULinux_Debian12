@@ -1,0 +1,13 @@
+[Unit]
+Description=Prometheus Unbound Exporter
+
+[Service]
+Type=simple
+Restart=on-failure
+User=root
+ExecStart=/usr/local/bin/unbound-exporter \
+	--block-file "/opt/unbound/blocklists/unbound.block.conf" \
+	--unbound.uri "unix://var/run/unbound.sock"
+
+[Install]
+WantedBy=multi-user.target

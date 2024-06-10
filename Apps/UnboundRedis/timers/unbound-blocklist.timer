@@ -1,0 +1,10 @@
+[Unit]
+Description=Atualização da Lista de Bloqueios (Timer) - Mensalmente no último DOM às 4h
+
+[Timer]
+#OnCalendar=Sun 04:00
+OnCalendar=Sun *-*~07/1 04:00
+Persistent=true
+ 
+[Install]
+WantedBy=timers.target

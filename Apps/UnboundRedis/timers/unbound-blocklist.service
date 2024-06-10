@@ -1,0 +1,6 @@
+[Unit]
+Description=Atualização da Lista de Bloqueios
+After=network.target
+
+[Service]
+ExecStart=/opt/unbound/scripts/update-blocklists.sh

@@ -1,0 +1,9 @@
+[Unit]
+Description=Atualização dos Root Hints (Timer) - Mensalmente no último DOM às 3:55h
+
+[Timer]
+OnCalendar=Sun *-*~07/1 03:55
+Persistent=true
+ 
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Atualização da Lista RPZ
+After=network.target
+
+[Service]
+ExecStart=/opt/unbound/scripts/update-rpz.sh
