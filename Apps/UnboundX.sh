@@ -93,7 +93,7 @@ echo "nameserver $meuip" >> /etc/resolv.conf
 apt install -y adduser libfontconfig1 musl
 wget https://dl.grafana.com/oss/release/grafana_11.0.0_amd64.deb
 dpkg -i grafana_11.0.0_amd64.deb
-[ ! -f /etc/grafana/grafana.ini ] && { cp -p -f Apps/UnboundDashboard/confs/grafana.ini /etc/grafana/grafana.ini; chown root:root /etc/grafana/grafana.ini; }
+[ ! -f /etc/grafana/grafana.ini ] && { cp -p -f UnboundDashboard/confs/grafana.ini /etc/grafana/grafana.ini; chown root:root /etc/grafana/grafana.ini; }
 if ! systemctl daemon-reload &>/dev/null; then
 	systemctl enable grafana-server.service &>/dev/null
 	systemctl start grafana-server.service &>/dev/null
@@ -101,30 +101,30 @@ fi
 
 # Instalar e Configurar o Prometheus
 apt install prometheus prometheus-node-exporter
-[ ! -f /etc/prometheus/prometheus.yml ] && { cp -p -f Apps/UnboundDashboard/confs/prometheus.yml /etc/prometheus/prometheus.yml; chown root:root /etc/prometheus/prometheus.yml; }
+[ ! -f /etc/prometheus/prometheus.yml ] && { cp -p -f UnboundDashboard/confs/prometheus.yml /etc/prometheus/prometheus.yml; chown root:root /etc/prometheus/prometheus.yml; }
 if ! systemctl is-enabled prometheus.service &>/dev/null; then
 	systemctl restart prometheus.service &>/dev/null
 fi
 
 # Copiar e COnfigurar o Unbound-Exporter
-[ ! -f /usr/local/bin/unbound-exporter ] && { cp -p -f Apps/UnboundDashboard/compiles/unbound-exporter /usr/local/bin/; chown root:root /usr/local/bin/unbound-exporter; chmod +x /usr/local/bin/unbound-exporter; }
-[ ! -f /etc/systemd/system/prometheus-unbound-exporter.service ] && { cp -p -f Apps/UnboundDashboard/confs/prometheus-unbound-exporter.service /etc/systemd/system/; chown root:root /etc/systemd/system/prometheus-unbound-exporter.service; }
+[ ! -f /usr/local/bin/unbound-exporter ] && { cp -p -f UnboundDashboard/compiles/unbound-exporter /usr/local/bin/; chown root:root /usr/local/bin/unbound-exporter; chmod +x /usr/local/bin/unbound-exporter; }
+[ ! -f /etc/systemd/system/prometheus-unbound-exporter.service ] && { cp -p -f UnboundDashboard/confs/prometheus-unbound-exporter.service /etc/systemd/system/; chown root:root /etc/systemd/system/prometheus-unbound-exporter.service; }
 if ! systemctl status prometheus-unbound-exporter.service &>/dev/null; then
 	systemctl enable prometheus-unbound-exporter.service &>/dev/null
 	systemctl start prometheus-unbound-exporter.service &>/dev/null
 fi
 
 # Instalar e Configurar o Loki e Promtail
-dpkg -i Apps/UnboundDashboard/compiles/loki_2.9.8_amd64.deb
-dpkg -i Apps/UnboundDashboard/compiles/promtail_2.9.8_amd64.deb
-[ ! -f /etc/loki/config.yml ] && { cp -p -f Apps/UnboundDashboard/confs/loki_config.yml /etc/loki/config.yml; chown root:root /etc/loki/config.yml; }
-[ ! -f /etc/promtail/config.yml ] && { cp -p -f Apps/UnboundDashboard/confs/promtail_config.yml /etc/promtail/config.yml; chown root:root /etc/promtail/config.yml; }
+dpkg -i UnboundDashboard/compiles/loki_2.9.8_amd64.deb
+dpkg -i UnboundDashboard/compiles/promtail_2.9.8_amd64.deb
+[ ! -f /etc/loki/config.yml ] && { cp -p -f UnboundDashboard/confs/loki_config.yml /etc/loki/config.yml; chown root:root /etc/loki/config.yml; }
+[ ! -f /etc/promtail/config.yml ] && { cp -p -f UnboundDashboard/confs/promtail_config.yml /etc/promtail/config.yml; chown root:root /etc/promtail/config.yml; }
 if ! systemctl restart loki.service &>/dev/null; then
 	systemctl restart promtail.service &>/dev/null
 fi
 
 # Copiar e Configurar o Unbound Logrotate
-[ ! -f /etc/logrotate.d/unbound ] && { cp -p -f Apps/UnboundDashboard/confs/logrotate_unbound /etc/logrotate.d/unbound; chown root:root /etc/logrotate.d/unbound; }
+[ ! -f /etc/logrotate.d/unbound ] && { cp -p -f UnboundDashboard/confs/logrotate_unbound /etc/logrotate.d/unbound; chown root:root /etc/logrotate.d/unbound; }
 
 
 
