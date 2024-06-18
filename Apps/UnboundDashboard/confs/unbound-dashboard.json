@@ -2551,7 +2551,7 @@
                 }
             ],
             "timeFrom": "24h",
-            "title": "⧉ Top Contultas",
+            "title": "⧉ Top Consultas",
             "transformations": [
                 {
                     "id": "organize",
